@@ -1,0 +1,36 @@
+# Carpetas de configuración de Android Studio
+.idea/
+*.iml
+
+# Configuración específica del sistema
+/local.properties
+
+# Archivos de compilación
+/build/
+*/build/
+
+# Archivos generados por Gradle
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Cachés y logs
+.cxx/
+*.log
+captures/
+.externalNativeBuild/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de ejecución
+*.iws
+*.ipr
+
+# Archivos generados por Compose
+*.apk
+*.ap_
+
+# Configuración de entorno (opcional si usás env vars)
+.env
