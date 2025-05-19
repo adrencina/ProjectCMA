@@ -46,4 +46,4 @@ aplicaciones Android.
 ## Clonación del proyecto
 
 ```bash
-git clone https://github.com/tu_usuario/nombre_del_repo.git
+git clone https://github.com/adrencina/ProjectCMA
