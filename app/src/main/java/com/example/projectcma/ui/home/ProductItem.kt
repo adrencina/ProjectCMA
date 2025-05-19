@@ -1,4 +1,7 @@
 package com.example.projectcma.ui.home
 
-class ProductItem {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun ProductItem() {
 }

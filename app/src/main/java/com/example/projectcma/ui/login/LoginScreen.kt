@@ -1,4 +1,7 @@
 package com.example.projectcma.ui.login
 
-class LoginScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun LoginScreen() {
 }

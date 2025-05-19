@@ -1,4 +1,7 @@
 package com.example.projectcma.ui.home
 
-class HomeScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun HomeScreen() {
 }
