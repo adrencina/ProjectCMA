@@ -41,7 +41,7 @@ android {
 
 dependencies {
 
-    // Navegación
+    // Navigation
     implementation(libs.androidx.navigation.compose)
 
     // Retrofit
@@ -49,6 +49,9 @@ dependencies {
 
     // Converter
     implementation(libs.converter.gson)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
 
     // Coil
     implementation(libs.coil.compose)
