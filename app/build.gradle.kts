@@ -56,6 +56,12 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
 
+    // material 3
+    implementation(libs.androidx.material.icons.extended)
+    implementation (libs.material3)
+
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
