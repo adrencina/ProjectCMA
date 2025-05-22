@@ -2,19 +2,21 @@ package com.example.projectcma.ui.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.projectcma.R
+import com.example.projectcma.ui.theme.RobotoBold
 import com.example.projectcma.viewmodel.PokemonViewModel
 
 @Composable
@@ -47,116 +50,116 @@ fun ProductDetailScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5D7F3))
-            .padding(start = 8.dp, end = 8.dp, top = 48.dp, bottom = 48.dp)
+            .background(Color(0xFFCC0000))
+            .padding(horizontal = 16.dp, vertical = 24.dp)
     ) {
         if (detail != null) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-
-                // TopBar con ID y nombre
-                Box(
+                // HEADER CON ID + NOMBRE + LOGO
+                Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(80.dp)
-                        .background(Color(0xFFA88CD6))
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.pokeball_icon),
-                        contentDescription = "Pokeball",
+                        .height(100.dp)
+                        .padding(top = 26.dp)
+                        .border(width = 4.dp, Color.Black,
+                            shape = RoundedCornerShape(8.dp)),
+                    shape = RoundedCornerShape(8.dp)
+                ){
+                    Row(
                         modifier = Modifier
-                            .align(Alignment.CenterStart)
-                            .padding(start = 16.dp)
-                            .size(48.dp)
-                            .clip(RoundedCornerShape(16.dp)),
-                        contentScale = ContentScale.Fit
-                    )
+                            .fillMaxWidth()
+                            .height(50.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color(0xB2FF0000))
+                            .padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
 
-                    Text(
-                        text = "${detail.name} (ID: ${detail.id})",
-                        modifier = Modifier.align(Alignment.Center),
-                        textAlign = TextAlign.Center,
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFFDFDFD)
-                    )
+                        Image(
+                            painter = painterResource(id = R.drawable.pokeballloginicon),
+                            contentDescription = "Pokebola",
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                        )
+
+                        Spacer(modifier = Modifier.width(30.dp))
+
+                        Text(
+                            text = "${detail.name.replaceFirstChar { it.uppercase() }} (ID: ${detail.id})",
+                            fontSize = 22.sp,
+                            fontFamily = RobotoBold,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
 
-                // Imagen del Pokémon
-                Box(
+                // CARD PRINCIPAL - IMAGEN
+                Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(240.dp)
-                        .background(Color(0x40FFFFFF))
+                        .height(400.dp)
+                        .padding(top = 16.dp)
+                        .border(width = 4.dp, Color.Black,
+                            shape = RoundedCornerShape(8.dp)),
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     AsyncImage(
                         model = detail.imageUrl,
                         contentDescription = "Imagen de ${detail.name}",
                         modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(160.dp)
-                            .clip(RoundedCornerShape(16.dp)),
+                            .size(80.dp)
+                            .clip(RoundedCornerShape(20.dp)),
                         contentScale = ContentScale.Fit
                     )
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
-
-                // Tipo o categoría
-                Box(
-                    modifier = Modifier
+                // CARD SECUNDARIA - DATOS
+                Surface(
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                         .fillMaxWidth()
-                        .height(80.dp)
-                        .background(Color(0xFFA88CD6))
-                ) {
+                        .height(200.dp)
+                        .padding(top = 16.dp)
+                        .border(width = 4.dp, Color.Black,
+                            shape = RoundedCornerShape(8.dp)),
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0xB2FF0000)
+                )  {
+                    // Tipo del Pokémon
                     Text(
                         text = detail.types.joinToString(" / ") { it.uppercase() },
-                        modifier = Modifier.align(Alignment.Center),
+                        fontSize = 20.sp,
+                        fontFamily = RobotoBold,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
                         textAlign = TextAlign.Center,
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFFDFDFD)
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
                     )
-                }
 
-                // Descripción
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(196.dp)
-                        .background(Color(0x80FFFFFF))
-                        .padding(8.dp)
-                ) {
+                    // Descripción
                     Text(
                         text = detail.description,
-                        modifier = Modifier.align(Alignment.Center),
+                        fontSize = 12.sp,
+                        fontFamily = RobotoBold,
+                        color = Color.White,
                         textAlign = TextAlign.Center,
-                        color = Color(0xFF6E6E6E),
-                        fontSize = 24.sp
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 50.dp)
                     )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = { /* Acción futura */ },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFE94125)
-                    )
-                ) {
-                    Text("¡Ver más!")
                 }
             }
         } else {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = Color.White)
             }
         }
     }

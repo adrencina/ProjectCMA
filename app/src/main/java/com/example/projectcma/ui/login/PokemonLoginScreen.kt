@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.example.projectcma.R
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
@@ -86,7 +87,7 @@ fun LoginScreen(
                         .padding(top = 24.dp, start = 8.dp)
                 ) {
                     Text(
-                        text = "POKEDEX OF",
+                        text = "POKEDEX",
                         fontSize = 34.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
@@ -139,6 +140,29 @@ fun LoginScreen(
                             .fillMaxSize()
                             .padding(16.dp)
                     ) {
+
+                        Text(
+                            text = "¡Bienvenidos!",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontFamily = RobotoBold,
+                            color = Color(0xFFCC0000),
+                            modifier = Modifier
+                                .padding(top = 8.dp)
+                                .align(Alignment.CenterHorizontally)
+                        )
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Text(
+                            text = "Ingresá tus datos para comenzar la aventura.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color(0xFFCC0000),
+                            modifier = Modifier
+                                .padding(bottom = 14.dp)
+                                .align(Alignment.CenterHorizontally)
+                                .alpha(0.6f)
+                        )
+
                         OutlinedTextField(
                             value = uiState.email,
                             onValueChange = { viewModel.onEmailChange(it) },
