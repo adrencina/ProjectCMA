@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.projectcma.data.remote.api.ApiClient
 import com.example.projectcma.data.remote.model.PokemonItem
 import com.example.projectcma.data.repository.PokemonRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class PokemonViewModel : ViewModel() {
@@ -19,13 +21,16 @@ class PokemonViewModel : ViewModel() {
     var searchQuery by mutableStateOf("")
         private set
 
+    private val _isDarkTheme = MutableStateFlow(false)
+    val isDarkTheme: StateFlow<Boolean> = _isDarkTheme
+
     init {
         loadPokemon()
     }
 
     private fun loadPokemon() {
         viewModelScope.launch {
-            pokemonList = repository.getPokemonList(50, 0)
+            pokemonList = repository.getPokemonList(1000, 0)
         }
     }
 
@@ -36,5 +41,9 @@ class PokemonViewModel : ViewModel() {
     fun getFilteredList(): List<PokemonItem> {
         return if (searchQuery.isBlank()) pokemonList
         else pokemonList.filter { it.name.contains(searchQuery, ignoreCase = true) }
+    }
+
+    fun toggleTheme() {
+        _isDarkTheme.value = !_isDarkTheme.value
     }
 }

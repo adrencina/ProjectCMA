@@ -1,7 +1,6 @@
 package com.example.projectcma.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,7 +12,13 @@ import com.example.projectcma.ui.login.LoginScreen
 import com.example.projectcma.viewmodel.PokemonViewModel
 
 @Composable
-fun AppNavigation(navController: NavHostController, pokemonViewModel1: PokemonViewModel) {
+fun AppNavigation(
+    navController: NavHostController,
+    pokemonViewModel: PokemonViewModel,
+    isDarkTheme: Boolean,
+    onToggleTheme: () -> Unit
+)
+{
     NavHost(
         navController = navController,
         startDestination = NavScreens.HomeScreen.route
@@ -21,15 +26,18 @@ fun AppNavigation(navController: NavHostController, pokemonViewModel1: PokemonVi
         composable(NavScreens.LoginScreen.route) {
             LoginScreen()
         }
+
         composable(NavScreens.HomeScreen.route) {
-            val pokemonViewModel = viewModel<PokemonViewModel>()
             HomeScreen(
                 viewModel = pokemonViewModel,
                 onItemClick = { productId ->
                     navController.navigate("productDetail/$productId")
-                }
+                },
+                isDarkTheme = isDarkTheme,
+                onToggleTheme = onToggleTheme
             )
         }
+
         composable(
             route = NavScreens.ProductDetailScreen.route,
             arguments = listOf(navArgument("productId") { type = NavType.StringType })
