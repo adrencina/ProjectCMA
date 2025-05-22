@@ -39,9 +39,7 @@ fun AppNavigation(
                 viewModel = pokemonViewModel,
                 onItemClick = { productId ->
                     navController.navigate("productDetail/$productId")
-                },
-                isDarkTheme = isDarkTheme,
-                onToggleTheme = onToggleTheme
+                }
             )
         }
 
