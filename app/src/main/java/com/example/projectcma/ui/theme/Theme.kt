@@ -15,6 +15,13 @@ val GrayText = Color(0xFF797777)
 val LightGray = Color(0xFFBDBDBD)
 val Red = Color(0xFFD32F2F)                // Errores o acciones destructivas
 
+
+val RedPokedex = Color(0xFFCC0000)
+val WhitePokedex = Color(0xFFFFFFFF)
+val BlackText = Color(0xFF1A1A1A)
+val GrayMetal = Color(0xFFB0B0B0)
+val YellowAccent = Color(0xFFFFCC00)
+
 // Paleta clara
 private val LightColorScheme = lightColorScheme(
     primary = DarkGreen,

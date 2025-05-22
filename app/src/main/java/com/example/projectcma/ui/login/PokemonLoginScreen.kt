@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -23,7 +24,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,12 +38,14 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import com.example.projectcma.ui.theme.RobotoBold
 
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit
 ) {
-    val viewModel = remember { LoginViewModel() }
+    val viewModel = remember { PokemonLoginViewModel() }
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(uiState.loginSuccess) {
@@ -53,63 +55,64 @@ fun LoginScreen(
         }
     }
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        containerColor = Color(0xFFCC0000),
         contentWindowInsets = WindowInsets.systemBars,
+
     ) { innerPadding ->
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .background(Color(0xFFCC0000))
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+
         ) {
 
             // HEADER
-            Box(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.topbar_pokedex),
-                    contentDescription = "botones superiores pokédex",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier.fillMaxSize()
-                )
+                    .height(120.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
 
-                Row(
-                    horizontalArrangement = Arrangement.Center,
+            ) {
+
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 24.dp)
+                        .padding(top = 24.dp, start = 8.dp)
                 ) {
                     Text(
-                        text = "POKÉDEX OF ARGENTINA",
-                        fontSize = 20.sp,
+                        text = "POKEDEX OF",
+                        fontSize = 34.sp,
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .width(200.dp)
-                            .align(Alignment.CenterVertically)
+                        textAlign = TextAlign.Start,
+                        fontFamily = RobotoBold
                     )
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "ARGENTINA",
+                        fontSize = 34.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        fontFamily = RobotoBold
+                    )
 
-                    Surface(
-                        modifier = Modifier
-                            .size(50.dp),
-                        tonalElevation = 2.dp,
-                        shape = RoundedCornerShape(25.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.pokeball_icon),
-                            contentDescription = "logo de pokeball",
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
                 }
+
+                Image(
+                    modifier = Modifier
+                        .size(120.dp)
+                        .padding(top = 24.dp, start = 12.dp),
+                    painter = painterResource(id = R.drawable.pokeballloginicon),
+                    contentDescription = "logo de pokeball",
+                    contentScale = ContentScale.Fit,
+                )
             }
 
             // LOGIN CARD
@@ -118,7 +121,8 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .height(450.dp)
                     .padding(top = 16.dp)
-                    .border(width = 6.dp, Color(0xFFB0B0B0), shape = RoundedCornerShape(20.dp)),
+                    .border(width = 6.dp, Color.White,
+                        shape = RoundedCornerShape(20.dp)),
                 shape = RoundedCornerShape(20.dp)
             ) {
                 Box {
@@ -128,7 +132,7 @@ fun LoginScreen(
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .fillMaxSize()
-                            .alpha(0.5f)
+                            .alpha(0.1f)
                     )
                     Column(
                         modifier = Modifier
@@ -180,48 +184,35 @@ fun LoginScreen(
             }
 
             // BOTÓN DE VALIDARSE
-            Surface(
-                modifier = Modifier
+
+                Box(
+                    modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(100.dp)
                     .padding(top = 16.dp)
-                    .border(3.dp, Color(0xFFB0B0B0), shape = RoundedCornerShape(20.dp)),
-                shape = RoundedCornerShape(20.dp),
-                tonalElevation = 10.dp
-            ) {
-                Box {
-                    Image(
-                        painter = painterResource(id = R.drawable.keystick_pokedex),
-                        contentDescription = "imagen joystick pokédex",
-                        contentScale = ContentScale.FillBounds,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                    Box(
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .padding(horizontal = 32.dp)
-                            .border(
-                                2.dp,
-                                color = Color(0xFF1A1A1A),
-                                shape = RoundedCornerShape(8.dp)
-                            )
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(if (uiState.isFormValid) Color(0xFF006400) else Color.Gray)
-                            .clickable(enabled = uiState.isFormValid) {
-                                viewModel.onLogin()
-                            }
-                            .padding(vertical = 10.dp, horizontal = 20.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "VALIDARSE",
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            modifier = Modifier.padding(vertical = 10.dp, horizontal = 20.dp)
+                        .background(Color(0xFFCC0000))
+                        .border(
+                            2.dp,
+                            color = Color(0xFFFFFFFF),
+                            shape = RoundedCornerShape(20.dp)
                         )
-                    }
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(if (uiState.isFormValid) Color(0xFF13C513) else Color.Gray)
+                        .clickable(enabled = uiState.isFormValid) {
+                            viewModel.onLogin()
+                        }
+                        .padding(vertical = 10.dp, horizontal = 20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "INICIAR SESIÓN",
+                        fontSize = 22.sp,
+                        fontFamily = RobotoBold,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier.padding(vertical = 10.dp, horizontal = 20.dp)
+                    )
                 }
             }
         }
     }
-}

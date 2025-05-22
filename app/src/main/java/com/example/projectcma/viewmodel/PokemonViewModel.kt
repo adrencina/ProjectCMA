@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.projectcma.data.remote.api.ApiClient
 import com.example.projectcma.data.remote.model.PokemonItem
 import com.example.projectcma.data.repository.PokemonRepository
-import com.example.projectcma.ui.home.PokemonDetailUi
+import com.example.projectcma.ui.detail.PokemonDetailUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

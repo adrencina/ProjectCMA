@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.projectcma.ui.home.HomeScreen
-import com.example.projectcma.ui.home.ProductDetailScreen
+import com.example.projectcma.ui.detail.ProductDetailScreen
 import com.example.projectcma.ui.login.LoginScreen
 import com.example.projectcma.viewmodel.PokemonViewModel
 

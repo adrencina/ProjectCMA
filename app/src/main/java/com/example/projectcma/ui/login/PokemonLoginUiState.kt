@@ -1,6 +1,6 @@
 package com.example.projectcma.ui.login
 
-data class LoginUiState(
+data class PokemonLoginUiState(
     val email: String = "",
     val password: String = "",
     val emailError: String? = null,

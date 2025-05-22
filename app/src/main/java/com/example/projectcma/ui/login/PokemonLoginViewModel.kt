@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class PokemonLoginViewModel : ViewModel() {
 
-    private val _uiState = MutableStateFlow(LoginUiState())
-    val uiState: StateFlow<LoginUiState> = _uiState
+    private val _uiState = MutableStateFlow(PokemonLoginUiState())
+    val uiState: StateFlow<PokemonLoginUiState> = _uiState
 
     fun onEmailChange(email: String) {
         val trimmed = email.trim()

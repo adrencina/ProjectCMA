@@ -1,4 +1,4 @@
-package com.example.projectcma.ui.home
+package com.example.projectcma.ui.detail
 
 data class PokemonDetailUi(
     val id: Int,
