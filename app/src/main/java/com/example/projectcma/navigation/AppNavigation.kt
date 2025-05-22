@@ -21,10 +21,17 @@ fun AppNavigation(
 {
     NavHost(
         navController = navController,
-        startDestination = NavScreens.HomeScreen.route
+        startDestination = NavScreens.LoginScreen.route
     ) {
         composable(NavScreens.LoginScreen.route) {
-            LoginScreen()
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(NavScreens.HomeScreen.route) {
+                        popUpTo(NavScreens.LoginScreen.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
 
         composable(NavScreens.HomeScreen.route) {
